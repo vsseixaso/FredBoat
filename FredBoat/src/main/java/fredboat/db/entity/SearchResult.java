@@ -241,8 +241,12 @@ public class SearchResult implements Serializable {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof SearchResultId)) return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof SearchResultId)) {
+                return false;
+            }
             SearchResultId other = (SearchResultId) o;
             return provider.equals(other.provider) && searchTerm.equals(other.searchTerm);
         }
@@ -316,7 +320,9 @@ public class SearchResult implements Serializable {
 
         private static List<AudioTrack> decodeTracks(AudioPlayerManager playerManager, byte[][] input) {
             List<AudioTrack> result = new ArrayList<>();
-            if (input == null) return result;
+            if (input == null) {
+                return result;
+            }
 
             for (byte[] track : input) {
                 AudioTrack decoded = decodeTrack(playerManager, track);
@@ -329,7 +335,9 @@ public class SearchResult implements Serializable {
 
         //may return null if the decoding fails or the input is null
         private static AudioTrack decodeTrack(AudioPlayerManager playerManager, byte[] input) {
-            if (input == null) return null;
+            if (input == null) {
+                return null;
+            }
             ByteArrayInputStream bais = new ByteArrayInputStream(input);
             try {
                 return playerManager.decodeTrack(new MessageInput(bais)).decodedTrack;

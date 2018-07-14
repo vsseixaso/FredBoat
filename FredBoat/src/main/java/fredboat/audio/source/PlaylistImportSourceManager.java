@@ -61,7 +61,9 @@ public class PlaylistImportSourceManager implements AudioSourceManager, Playlist
     public AudioItem loadItem(DefaultAudioPlayerManager manager, AudioReference ar) {
 
         String[] parsed = parse(ar.identifier);
-        if (parsed == null) return null;
+        if (parsed == null) {
+            return null;
+        }
         String serviceName = parsed[0];
         String pasteId = parsed[1];
 
@@ -175,11 +177,15 @@ public class PlaylistImportSourceManager implements AudioSourceManager, Playlist
     public PlaylistInfo getPlaylistDataBlocking(String identifier) {
 
         String[] pasteData = parse(identifier);
-        if (pasteData == null) return null;
+        if (pasteData == null) {
+            return null;
+        }
 
         String serviceName = pasteData[0];
         String pasteId = pasteData[1];
-        if (serviceName == null || "".equals(serviceName) || pasteId == null || "".equals(pasteId)) return null;
+        if (serviceName == null || "".equals(serviceName) || pasteId == null || "".equals(pasteId)) {
+            return null;
+        }
 
         List<String> trackIds = loadAndParseTrackIds(serviceName, pasteId);
 

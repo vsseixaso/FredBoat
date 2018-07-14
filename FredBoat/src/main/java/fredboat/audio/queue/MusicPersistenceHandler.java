@@ -200,7 +200,7 @@ public class MusicPersistenceHandler {
                 if (tc != null) {
                     player.setCurrentTC(tc);
                 }
-                if(Config.CONFIG.getDistribution().volumeSupported()) {
+                if (Config.CONFIG.getDistribution().volumeSupported()) {
                     player.setVolume(volume);
                 }
                 player.setRepeatMode(repeatMode);
@@ -212,8 +212,9 @@ public class MusicPersistenceHandler {
                     JSONObject json = (JSONObject) t;
                     byte[] message = Base64.decodeBase64(json.getString("message"));
                     Member member = guild.getMemberById(json.getLong("user"));
-                    if (member == null)
+                    if (member == null) {
                         member = guild.getSelfMember(); //member left the guild meanwhile, set ourselves as the one who added the song
+                    }
 
                     AudioTrack at;
                     try {
@@ -231,7 +232,7 @@ public class MusicPersistenceHandler {
                     // Handle split tracks
                     AudioTrackContext atc;
                     JSONObject split = json.optJSONObject("split");
-                    if(split != null) {
+                    if (split != null) {
                         atc = new SplitAudioTrackContext(at, member,
                                 split.getLong("startPos"),
                                 split.getLong("endPos"),

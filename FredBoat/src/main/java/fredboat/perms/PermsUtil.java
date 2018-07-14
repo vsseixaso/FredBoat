@@ -55,9 +55,15 @@ public class PermsUtil {
 
         GuildPermissions gp = EntityReader.getGuildPermissions(member.getGuild());
 
-        if (checkList(gp.getAdminList(), member)) return PermissionLevel.ADMIN;
-        if (checkList(gp.getDjList(), member)) return PermissionLevel.DJ;
-        if (checkList(gp.getUserList(), member)) return PermissionLevel.USER;
+        if (checkList(gp.getAdminList(), member)) {
+            return PermissionLevel.ADMIN;
+        }
+        if (checkList(gp.getDjList(), member)) {
+            return PermissionLevel.DJ;
+        }
+        if (checkList(gp.getUserList(), member)) {
+            return PermissionLevel.USER;
+        }
 
         return PermissionLevel.BASE;
     }
@@ -100,17 +106,24 @@ public class PermsUtil {
     }
 
     public static boolean checkList(List<String> list, Member member) {
-        if (PermissionUtil.checkPermission(member, Permission.ADMINISTRATOR)) return true;
+        if (PermissionUtil.checkPermission(member, Permission.ADMINISTRATOR)) {
+            return true;
+        }
 
         for (String id : list) {
-            if (id.isEmpty()) continue;
+            if (id.isEmpty()) {
+                continue;
+            }
 
-            if (id.equals(member.getUser().getId())) return true;
+            if (id.equals(member.getUser().getId())) {
+                return true;
+            }
 
             Role role = member.getGuild().getRoleById(id);
             if (role != null &&
-                    (role.isPublicRole() || member.getRoles().contains(role)))
+                    (role.isPublicRole() || member.getRoles().contains(role))) {
                 return true;
+            }
         }
 
         return false;

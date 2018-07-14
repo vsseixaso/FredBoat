@@ -73,7 +73,9 @@ public class MavenTestCommand extends Command implements ICommandRestricted {
             } catch (TimeoutException | ExecutionException ignored) {
             }
             File pom = new File("FredBoat/pom.xml");
-            if (!pom.exists()) pom = new File("pom.xml");
+            if (!pom.exists()) {
+                pom = new File("pom.xml");
+            }
             if (!pom.exists()) {
                 CentralMessaging.editMessage(status, status.getRawContent() + "[:anger: could not locate pom.xml:]\n\n");
                 throw new RuntimeException("Could not locate file: pom.xml");

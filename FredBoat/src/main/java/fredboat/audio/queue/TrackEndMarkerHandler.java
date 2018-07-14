@@ -50,8 +50,9 @@ public class TrackEndMarkerHandler implements TrackMarkerHandler {
             //state == STOPPED after we already called skip on it, so it may be ignored safely
             //state == REACHED if the tracks runs out by itself
             //state == BYPASSED if the track was forwarded over its length
-            if (state.equals(MarkerState.REACHED) | state.equals(MarkerState.BYPASSED))
+            if (state.equals(MarkerState.REACHED) | state.equals(MarkerState.BYPASSED)) {
                 player.stopTrack();
+            }
         }
     }
 }

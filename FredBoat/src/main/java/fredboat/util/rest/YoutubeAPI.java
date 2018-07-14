@@ -76,7 +76,7 @@ public class YoutubeAPI {
     }
 
     public static YoutubeVideo getVideoFromID(String id, boolean verbose) {
-        if(verbose){
+        if (verbose){
             String gkey = Config.CONFIG.getRandomGoogleKey();
             Http.SimpleRequest request = Http.get(YOUTUBE_VIDEO_VERBOSE, Http.Params.of(
                     "id", id,

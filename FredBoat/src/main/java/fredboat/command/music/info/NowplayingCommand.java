@@ -107,7 +107,7 @@ public class NowplayingCommand extends Command implements IMusicCommand {
         String desc = yv.getDescription();
 
         //Shorten it to about 400 chars if it's too long
-        if(desc.length() > 450){
+        if (desc.length() > 450){
             desc = TextUtils.substringPreserveWords(desc, 400) + " [...]";
         }
 
@@ -115,7 +115,7 @@ public class NowplayingCommand extends Command implements IMusicCommand {
                 .setTitle(atc.getEffectiveTitle(), "https://www.youtube.com/watch?v=" + at.getIdentifier())
                 .addField("Time", timeField, true);
 
-        if(!desc.equals("")) {
+        if (!desc.equals("")) {
             eb.addField(atc.i18n("npDescription"), desc, false);
         }
 
@@ -197,7 +197,7 @@ public class NowplayingCommand extends Command implements IMusicCommand {
                     .addField(context.i18n("artist"), data.getJSONObject("SONGINFO").getString("ARTIST"), true)
                     .addField(context.i18n("circle"), data.getJSONObject("SONGINFO").getString("CIRCLE"), true);
 
-            if(data.getJSONObject("SONGINFO").optInt("YEAR") != 0){
+            if (data.getJSONObject("SONGINFO").optInt("YEAR") != 0){
                 eb.addField(context.i18n("year"), Integer.toString(data.getJSONObject("SONGINFO").getInt("YEAR")), true);
             }
 

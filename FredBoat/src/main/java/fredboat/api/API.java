@@ -46,7 +46,7 @@ public class API {
     private API() {}
 
     public static void start() {
-        if(!Config.CONFIG.isRestServerEnabled()) {
+        if (!Config.CONFIG.isRestServerEnabled()) {
             log.warn("Rest server is not enabled. Skipping Spark ignition!");
             return;
         }

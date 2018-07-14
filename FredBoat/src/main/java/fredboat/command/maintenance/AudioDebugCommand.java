@@ -62,7 +62,7 @@ public class AudioDebugCommand extends Command implements IMaintenanceCommand {
         String msg = "";
         GuildPlayer guildPlayer = PlayerRegistry.getExisting(context.guild);
 
-        if(guildPlayer == null) {
+        if (guildPlayer == null) {
             msg = msg + "No GuildPlayer found.\n";
         } else {
             int deficit = AudioLossCounter.EXPECTED_PACKET_COUNT_PER_MIN - (guildPlayer.getAudioLossCounter().getLastMinuteLoss() + guildPlayer.getAudioLossCounter().getLastMinuteSuccess());

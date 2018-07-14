@@ -134,7 +134,9 @@ public class SkipCommand extends Command implements IMusicCommand, ICommandRestr
 
     private void skipInRange(GuildPlayer player, CommandContext context) {
         Matcher trackMatch = trackRangePattern.matcher(context.args[0]);
-        if (!trackMatch.find()) return;
+        if (!trackMatch.find()) {
+            return;
+        }
 
         int startTrackIndex;
         int endTrackIndex;

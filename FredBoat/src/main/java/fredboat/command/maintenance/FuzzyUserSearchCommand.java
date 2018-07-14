@@ -52,7 +52,7 @@ public class FuzzyUserSearchCommand extends Command implements IMaintenanceComma
             String query = context.rawArgs;
             List<Member> list = ArgumentUtil.fuzzyMemberSearch(context.guild, query, true);
 
-            if(list.isEmpty()){
+            if (list.isEmpty()){
                 context.replyWithName(context.i18n("fuzzyNoResults"));
                 return;
             }

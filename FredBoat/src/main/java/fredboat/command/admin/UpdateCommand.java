@@ -58,7 +58,7 @@ public class UpdateCommand extends Command implements ICommandRestricted {
             File homeJar = new File(System.getProperty("user.home") + "/FredBoat-1.0.jar");
 
             //Must exist and not be too old
-            if(homeJar.exists()
+            if (homeJar.exists()
                     && (System.currentTimeMillis() - homeJar.lastModified()) < MAX_JAR_AGE){
                 update(context);
                 return;

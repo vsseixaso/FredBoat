@@ -121,14 +121,19 @@ public class SimpleTrackProvider extends AbstractTrackProvider {
         int i = 0;
         List<AudioTrackContext> result = new ArrayList<>();
         for (AudioTrackContext atc : getAsListOrdered()) {
-            if (i >= startIndex && i < endIndex)
+            if (i >= startIndex && i < endIndex) {
                 result.add(atc);
+            }
             i++;
-            if (i >= endIndex) break;//abort early if we're done
+            if (i >= endIndex) {
+                break;//abort early if we're done
+            }
         }
 
         //trigger shuffle queue update if we found tracks to remove
-        if (result.size() > 0) shouldUpdateShuffledQueue = true;
+        if (result.size() > 0) {
+            shouldUpdateShuffledQueue = true;
+        }
         return result;
     }
 
@@ -143,7 +148,9 @@ public class SimpleTrackProvider extends AbstractTrackProvider {
         //this is needed because, related to the repeat all mode, turning shuffle off, skipping a track, turning shuffle
         //on will cause an incorrect playlist to show with the list command and may lead to a bug of an
         //IllegalStateException due to trying to play the same AudioTrack object twice
-        if (shuffle) shouldUpdateShuffledQueue = true;
+        if (shuffle) {
+            shouldUpdateShuffledQueue = true;
+        }
     }
 
     @Override

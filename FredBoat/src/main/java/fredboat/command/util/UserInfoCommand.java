@@ -60,7 +60,9 @@ public class UserInfoCommand extends Command implements IUtilCommand {
         } else {
             target = ArgumentUtil.checkSingleFuzzyMemberSearchResult(context, context.rawArgs, true);
         }
-        if (target == null) return;
+        if (target == null) {
+            return;
+        }
         FredBoat.getAllGuilds().forEach(guild -> {
             if (guild.getMemberById(target.getUser().getId()) != null) {
                 matchedGuildNames.add(guild.getName());

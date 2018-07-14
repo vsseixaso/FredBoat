@@ -52,7 +52,9 @@ public class ArgumentUtil {
                     || (mem.getEffectiveName().toLowerCase().contains(term))
                     || term.contains(mem.getUser().getId())) {
 
-                if (!includeBots && mem.getUser().isBot()) continue;
+                if (!includeBots && mem.getUser().isBot()) {
+                    continue;
+                }
                 list.add(mem);
             }
         }
@@ -119,7 +121,9 @@ public class ArgumentUtil {
                 StringBuilder searchResults = new StringBuilder();
                 int i = 0;
                 for (IMentionable mentionable : list) {
-                    if (i == FUZZY_RESULT_LIMIT) break;
+                    if (i == FUZZY_RESULT_LIMIT) {
+                        break;
+                    }
 
                     if (mentionable instanceof Member) {
                         Member member = (Member) mentionable;

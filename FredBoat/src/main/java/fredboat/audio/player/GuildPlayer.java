@@ -192,7 +192,9 @@ public class GuildPlayer extends AbstractPlayer {
 
     public int getTrackCount() {
         int trackCount = audioTrackProvider.size();
-        if (player.getPlayingTrack() != null) trackCount++;
+        if (player.getPlayingTrack() != null) {
+            trackCount++;
+        }
         return trackCount;
     }
 
@@ -243,7 +245,9 @@ public class GuildPlayer extends AbstractPlayer {
     public long getStreamsCount() {
         long streams = audioTrackProvider.streamsCount();
         AudioTrackContext atc = player.getPlayingTrack() != null ? context : null;
-        if (atc != null && atc.getTrack().getInfo().isStream) streams++;
+        if (atc != null && atc.getTrack().getInfo().isStream) {
+            streams++;
+        }
         return streams;
     }
 
@@ -258,10 +262,11 @@ public class GuildPlayer extends AbstractPlayer {
             j = jda[0];
         }
         Guild guild = j.getGuildById(guildId);
-        if (guild != null)
+        if (guild != null) {
             return LavalinkManager.ins.getConnectedChannel(guild);
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -322,9 +327,11 @@ public class GuildPlayer extends AbstractPlayer {
     }
 
     public RepeatMode getRepeatMode() {
-        if (audioTrackProvider instanceof AbstractTrackProvider)
+        if (audioTrackProvider instanceof AbstractTrackProvider) {
             return ((AbstractTrackProvider) audioTrackProvider).getRepeatMode();
-        else return RepeatMode.OFF;
+        } else {
+            return RepeatMode.OFF;
+        }
     }
 
     public boolean isShuffle() {

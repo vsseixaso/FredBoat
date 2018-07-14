@@ -54,7 +54,7 @@ public class PlayerDebugCommand extends Command implements ICommandRestricted {
     public void onInvoke(@Nonnull CommandContext context) {
         JSONArray a = new JSONArray();
         
-        for(GuildPlayer gp : PlayerRegistry.getRegistry().values()){
+        for (GuildPlayer gp : PlayerRegistry.getRegistry().values()){
             JSONObject data = new JSONObject();
             data.put("name", gp.getGuild().getName());
             data.put("id", gp.getGuild().getId());

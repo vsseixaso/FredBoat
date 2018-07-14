@@ -53,7 +53,7 @@ public class JoinCommand extends Command implements IMusicCommand, ICommandRestr
                 context.reply(context.i18nFormat("joinJoining", vc.getName()));
             }
         } catch (IllegalStateException ex) {
-            if(vc != null) {
+            if (vc != null) {
                 context.reply(context.i18nFormat("joinErrorAlreadyJoining", vc.getName()));
             } else {
                 throw ex;

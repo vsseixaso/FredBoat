@@ -56,7 +56,7 @@ public class ListCommand extends Command implements IMusicCommand {
     public void onInvoke(@Nonnull CommandContext context) {
         GuildPlayer player = PlayerRegistry.getOrCreate(context.guild);
 
-        if(player.isQueueEmpty()) {
+        if (player.isQueueEmpty()) {
             context.reply(context.i18n("npNotPlaying"));
             return;
         }
@@ -89,8 +89,9 @@ public class ListCommand extends Command implements IMusicCommand {
         if (player.isShuffle()) {
             mb.append(context.i18n("listShowShuffled"));
             mb.append("\n");
-            if (player.getRepeatMode() == RepeatMode.OFF)
+            if (player.getRepeatMode() == RepeatMode.OFF) {
                 mb.append("\n");
+            }
         }
         if (player.getRepeatMode() == RepeatMode.SINGLE) {
             mb.append(context.i18n("listShowRepeatSingle"));

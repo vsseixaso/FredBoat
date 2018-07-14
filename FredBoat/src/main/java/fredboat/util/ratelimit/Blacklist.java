@@ -89,15 +89,22 @@ public class Blacklist {
     public boolean isBlacklisted(long id) {
 
         //first of all, ppl that can never get blacklisted no matter what
-        if (userWhiteList.contains(id)) return false;
+        if (userWhiteList.contains(id)) {
+            return false;
+        }
 
         BlacklistEntry blEntry = blacklist.get(id);
-        if (blEntry == null) return false;     //blacklist entry doesn't even exist
-        if (blEntry.level < 0) return false;   //blacklist entry exists, but id hasn't actually been blacklisted yet
+        if (blEntry == null) {
+            return false;     //blacklist entry doesn't even exist
+        }
+        if (blEntry.level < 0) {
+            return false;   //blacklist entry exists, but id hasn't actually been blacklisted yet
+        }
 
         //id was a blacklisted, but it has run out
-        if (System.currentTimeMillis() > blEntry.blacklistedTimestamp + (getBlacklistTimeLength(blEntry.level)))
+        if (System.currentTimeMillis() > blEntry.blacklistedTimestamp + (getBlacklistTimeLength(blEntry.level))) {
             return false;
+        }
 
         //looks like this id is blacklisted ¯\_(ツ)_/¯
         return true;
@@ -110,8 +117,9 @@ public class Blacklist {
         //update blacklist entry of this id
         long blacklistingLength = 0;
         BlacklistEntry blEntry = blacklist.get(id);
-        if (blEntry == null)
+        if (blEntry == null) {
             blEntry = getOrCreateBlacklistEntry(id);
+        }
 
         //synchronize on the individual blacklist entries since we are about to change and save them
         //noinspection SynchronizationOnLocalVariableOrMethodParameter
@@ -148,7 +156,9 @@ public class Blacklist {
     private synchronized BlacklistEntry getOrCreateBlacklistEntry(long id) {
         //was one created in the meantime? use that
         BlacklistEntry result = blacklist.get(id);
-        if (result != null) return result;
+        if (result != null) {
+            return result;
+        }
 
         //create and return it
         result = new BlacklistEntry(id);

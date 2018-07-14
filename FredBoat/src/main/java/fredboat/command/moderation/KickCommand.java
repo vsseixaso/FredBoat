@@ -69,10 +69,14 @@ public class KickCommand extends Command implements IModerationCommand {
 
         //was there a target provided?
         Member target = ArgumentUtil.checkSingleFuzzyMemberSearchResult(context, context.args[0]);
-        if (target == null) return;
+        if (target == null) {
+            return;
+        }
 
         //are we allowed to do that?
-        if (!checkKickAuthorization(context, target)) return;
+        if (!checkKickAuthorization(context, target)) {
+            return;
+        }
 
         //putting together a reason
         String plainReason = DiscordUtil.getReasonForModAction(context);

@@ -68,23 +68,24 @@ public class HttpSourceManager extends HttpAudioSourceManager {
         try {
             //reset position to start of stream to get full html content
             stream.seek(0L);
-            if(charset != null)
+            if (charset != null) {
                 IOUtils.copy(stream, writer, charset);
-            else
+            } else {
                 IOUtils.copy(stream, writer, StandardCharsets.UTF_8);
+            }
         } catch(IOException ex) {
             throw new FriendlyException("Could not read HTML body", SUSPICIOUS, ex);
         }
         String htmlBody = writer.toString();
         Matcher matcher = PLAYLIST_PATTERN.matcher(htmlBody);
-        if(matcher.find()) {
+        if (matcher.find()) {
             return detectContainer(resolve(reference, matcher.group(1)), true);
         }
         return null;
     }
 
     private AudioReference resolve(AudioReference original, String resolve) {
-        if(resolve.startsWith("http")) {
+        if (resolve.startsWith("http")) {
             return new AudioReference(resolve, original.title);
         }
         try {
@@ -152,7 +153,7 @@ public class HttpSourceManager extends HttpAudioSourceManager {
 
             /* START CUSTOM CHANGES */
             MediaContainerDetectionResult detection = MediaContainerDetection.detectContainer(reference, inputStream, hints);
-            if(!ignoreHtml && !detection.isReference() && !detection.isContainerDetected() && hints.mimeType.startsWith("text/html")) {
+            if (!ignoreHtml && !detection.isReference() && !detection.isContainerDetected() && hints.mimeType.startsWith("text/html")) {
                 return checkHtmlResponse(reference, inputStream, hints);
             }
             return detection;

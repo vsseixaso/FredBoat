@@ -116,8 +116,9 @@ public class AudioLoader implements AudioLoadResultHandler {
     private boolean ratelimitIfSlowLoadingPlaylistAndAnnounce(IdentifierContext ic) {
         PlaylistInfo playlistInfo = getSlowLoadingPlaylistData(ic.identifier);
 
-        if (playlistInfo == null) //not a slow loading playlist
+        if (playlistInfo == null) { //not a slow loading playlist
             return true;
+        }
         else {
             boolean result = true;
             if (FeatureFlags.RATE_LIMITER.isActive()) {
@@ -169,7 +170,7 @@ public class AudioLoader implements AudioLoadResultHandler {
     public void trackLoaded(AudioTrack at) {
         Metrics.tracksLoaded.inc();
         try {
-            if(context.isSplit()){
+            if (context.isSplit()){
                 loadSplit(at, context);
             } else {
 
@@ -200,7 +201,7 @@ public class AudioLoader implements AudioLoadResultHandler {
     public void playlistLoaded(AudioPlaylist ap) {
         Metrics.tracksLoaded.inc(ap.getTracks() == null ? 0 : ap.getTracks().size());
         try {
-            if(context.isSplit()){
+            if (context.isSplit()){
                 context.reply(context.i18n("loadPlaySplitListFail"));
                 loadNextAsync();
                 return;
@@ -240,7 +241,7 @@ public class AudioLoader implements AudioLoadResultHandler {
     }
 
     private void loadSplit(AudioTrack at, IdentifierContext ic){
-        if(!(at instanceof YoutubeAudioTrack)){
+        if (!(at instanceof YoutubeAudioTrack)){
             ic.reply(ic.i18n("loadSplitNotYouTube"));
             return;
         }
@@ -263,7 +264,7 @@ public class AudioLoader implements AudioLoadResultHandler {
             String title1 = m.group(1);
             String title2 = m.group(3);
             
-            if(title1.length() > title2.length()) {
+            if (title1.length() > title2.length()) {
                 pairs.add(new ImmutablePair<>(timestamp, title1));
             } else {
                 pairs.add(new ImmutablePair<>(timestamp, title2));
@@ -272,7 +273,7 @@ public class AudioLoader implements AudioLoadResultHandler {
 
         }
 
-        if(pairs.size() < 2) {
+        if (pairs.size() < 2) {
             ic.reply(ic.i18n("loadSplitNotResolves"));
             return;
         }
@@ -284,7 +285,7 @@ public class AudioLoader implements AudioLoadResultHandler {
             long startPos;
             long endPos;
 
-            if(i != pairs.size() - 1){
+            if (i != pairs.size() - 1){
                 // Not last
                 startPos = pair.getLeft();
                 endPos = pairs.get(i + 1).getLeft();
@@ -316,7 +317,7 @@ public class AudioLoader implements AudioLoadResultHandler {
         }
 
         //This is pretty spammy .. let's use a shorter one
-        if(mb.length() > 800){
+        if (mb.length() > 800){
             mb = CentralMessaging.getClearThreadLocalMessageBuilder()
                     .append(ic.i18nFormat("loadPlaylistTooMany", list.size()));
         }

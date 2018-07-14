@@ -83,15 +83,17 @@ public class Ratelimiter {
         whitelist.add(DiscordUtil.getOwnerId(jda));
         whitelist.add(jda.getSelfUser().getIdLong());
         //only works for those admins who are added with their userId and not through a roleId
-        for (String admin : Config.CONFIG.getAdminIds())
+        for (String admin : Config.CONFIG.getAdminIds()) {
             whitelist.add(Long.valueOf(admin));
+        }
 
 
         //Create all the rate limiters we want
         ratelimits = new ArrayList<>();
 
-        if (Config.CONFIG.useAutoBlacklist())
+        if (Config.CONFIG.useAutoBlacklist()) {
             autoBlacklist = new Blacklist(whitelist, RATE_LIMIT_HITS_BEFORE_BLACKLIST);
+        }
 
         //sort these by harsher limits coming first
         ratelimits.add(new Ratelimit(whitelist, Ratelimit.Scope.USER, 2, 30000, ShardsCommand.class));
@@ -143,7 +145,8 @@ public class Ratelimiter {
         for (Ratelimit ratelimit : ratelimits) {
             ratelimit.liftLimit(id);
         }
-        if (autoBlacklist != null)
+        if (autoBlacklist != null) {
             autoBlacklist.liftBlacklist(id);
+        }
     }
 }

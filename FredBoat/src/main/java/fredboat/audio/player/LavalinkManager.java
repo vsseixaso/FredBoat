@@ -47,7 +47,9 @@ public class LavalinkManager {
     private Lavalink lavalink = null;
 
     public void start() {
-        if (!isEnabled()) return;
+        if (!isEnabled()) {
+            return;
+        }
 
         String userId = DiscordUtil.getUserId(Config.CONFIG.getBotToken());
 

@@ -63,10 +63,14 @@ public class SoftbanCommand extends Command implements IModerationCommand {
 
         //was there a target provided?
         Member target = ArgumentUtil.checkSingleFuzzyMemberSearchResult(context, context.args[0]);
-        if (target == null) return;
+        if (target == null) {
+            return;
+        }
 
         //are we allowed to do that?
-        if (!checkAuthorization(context, target)) return;
+        if (!checkAuthorization(context, target)) {
+            return;
+        }
 
         //putting together a reason
         String plainReason = DiscordUtil.getReasonForModAction(context);
@@ -103,17 +107,17 @@ public class SoftbanCommand extends Command implements IModerationCommand {
 
     private boolean checkAuthorization(CommandContext context, Member target) {
         Member mod = context.invoker;
-        if(mod == target) {
+        if (mod == target) {
             context.replyWithName(context.i18n("softbanFailSelf"));
             return false;
         }
 
-        if(target.isOwner()) {
+        if (target.isOwner()) {
             context.replyWithName(context.i18n("softbanFailOwner"));
             return false;
         }
 
-        if(target == target.getGuild().getSelfMember()) {
+        if (target == target.getGuild().getSelfMember()) {
             context.replyWithName(context.i18n("softbanFailMyself"));
             return false;
         }

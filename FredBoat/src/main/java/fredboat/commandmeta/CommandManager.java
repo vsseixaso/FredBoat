@@ -128,7 +128,7 @@ public class CommandManager {
             PermissionLevel minPerms = ((ICommandRestricted) invoked).getMinimumPerms();
             PermissionLevel actual = PermsUtil.getPerms(invoker);
 
-            if(actual.getLevel() < minPerms.getLevel()) {
+            if (actual.getLevel() < minPerms.getLevel()) {
                 context.replyWithName(context.i18nFormat("cmdPermsTooLow", minPerms, actual));
                 return;
             }

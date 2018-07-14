@@ -53,7 +53,9 @@ public class PlaySplitCommand extends Command implements IMusicCommand, ICommand
             return;
         }
 
-        if (!PlayerLimitManager.checkLimitResponsive(context)) return;
+        if (!PlayerLimitManager.checkLimitResponsive(context)) {
+            return;
+        }
 
         IdentifierContext ic = new IdentifierContext(context.args[0], context.channel, context.invoker);
         ic.setSplit(true);

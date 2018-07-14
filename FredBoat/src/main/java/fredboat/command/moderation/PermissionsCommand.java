@@ -82,7 +82,9 @@ public class PermissionsCommand extends Command implements IModerationCommand {
             case "remove":
             case "rem":
             case "rm":
-                if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context)) return;
+                if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context)) {
+                    return;
+                }
 
                 if (context.args.length < 2) {
                     HelpCommand.sendFormattedCommandHelp(context);
@@ -92,7 +94,9 @@ public class PermissionsCommand extends Command implements IModerationCommand {
                 remove(context);
                 break;
             case "add":
-                if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context)) return;
+                if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context)) {
+                    return;
+                }
 
                 if (context.args.length < 2) {
                     HelpCommand.sendFormattedCommandHelp(context);
@@ -123,7 +127,9 @@ public class PermissionsCommand extends Command implements IModerationCommand {
         GuildPermissions gp = EntityReader.getGuildPermissions(guild);
 
         IMentionable selected = ArgumentUtil.checkSingleFuzzySearchResult(search, context, term);
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
 
         if (!gp.getFromEnum(permissionLevel).contains(mentionableToId(selected))) {
             context.replyWithName(context. i18nFormat("permsNotAdded", "`" + mentionableToName(selected) + "`", "`" + permissionLevel + "`"));
@@ -158,7 +164,9 @@ public class PermissionsCommand extends Command implements IModerationCommand {
         GuildPermissions gp = EntityReader.getGuildPermissions(guild);
 
         IMentionable selected = ArgumentUtil.checkSingleFuzzySearchResult(list, context, term);
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
 
         if (gp.getFromEnum(permissionLevel).contains(mentionableToId(selected))) {
             context.replyWithName(context.i18nFormat("permsAlreadyAdded", "`" + mentionableToName(selected) + "`", "`" + permissionLevel + "`"));
@@ -198,8 +206,12 @@ public class PermissionsCommand extends Command implements IModerationCommand {
         PermissionLevel invokerPerms = PermsUtil.getPerms(invoker);
         boolean invokerHas = PermsUtil.checkPerms(permissionLevel, invoker);
 
-        if (roleMentions.isEmpty()) roleMentions = "<none>";
-        if (memberMentions.isEmpty()) memberMentions = "<none>";
+        if (roleMentions.isEmpty()) {
+            roleMentions = "<none>";
+        }
+        if (memberMentions.isEmpty()) {
+            memberMentions = "<none>";
+        }
 
         EmbedBuilder eb = CentralMessaging.getColoredEmbedBuilder()
                 .setTitle(context.i18nFormat("permsListTitle", permissionLevel))
@@ -234,7 +246,9 @@ public class PermissionsCommand extends Command implements IModerationCommand {
         List<IMentionable> out = new ArrayList<>();
 
         for (String id : list) {
-            if (id.equals("")) continue;
+            if (id.equals("")) {
+                continue;
+            }
 
             if (guild.getRoleById(id) != null) {
                 out.add(guild.getRoleById(id));

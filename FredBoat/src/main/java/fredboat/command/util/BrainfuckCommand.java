@@ -62,7 +62,7 @@ public class BrainfuckCommand extends Command implements IUtilCommand {
                     break;
                 case '<':
                     --data;
-                    if(data < 0){
+                    if (data < 0){
                         throw new BrainfuckException(context.i18nFormat("brainfuckDataPointerOutOfBounds", data));
                     }
                     break;

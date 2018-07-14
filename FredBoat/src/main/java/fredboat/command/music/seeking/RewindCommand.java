@@ -48,7 +48,7 @@ public class RewindCommand extends Command implements IMusicCommand, ICommandRes
     public void onInvoke(@Nonnull CommandContext context) {
         GuildPlayer player = PlayerRegistry.getExisting(context.guild);
 
-        if(player == null || player.isQueueEmpty()) {
+        if (player == null || player.isQueueEmpty()) {
             context.replyWithName(context.i18n("queueEmpty"));
             return;
         }

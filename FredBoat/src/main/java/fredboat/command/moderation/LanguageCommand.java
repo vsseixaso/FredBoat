@@ -56,8 +56,9 @@ public class LanguageCommand extends Command implements IModerationCommand {
             return;
         }
 
-        if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context))
+        if (!PermsUtil.checkPermsWithFeedback(PermissionLevel.ADMIN, context)) {
             return;
+        }
         
         //Assume proper usage and that we are about to set a new language
         try {

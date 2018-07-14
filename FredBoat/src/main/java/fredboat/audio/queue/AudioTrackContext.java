@@ -125,14 +125,24 @@ public class AudioTrackContext extends LeakSafeContext implements Comparable<Aud
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AudioTrackContext)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AudioTrackContext)) {
+            return false;
+        }
 
         AudioTrackContext that = (AudioTrackContext) o;
 
-        if (getRand() != that.getRand()) return false;
-        if (!getTrack().equals(that.getTrack())) return false;
-        if (userId != that.userId) return false;
+        if (getRand() != that.getRand()) {
+            return false;
+        }
+        if (!getTrack().equals(that.getTrack())) {
+            return false;
+        }
+        if (userId != that.userId) {
+            return false;
+        }
         return guildId == that.guildId;
     }
 

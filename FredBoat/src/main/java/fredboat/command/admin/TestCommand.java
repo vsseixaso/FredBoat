@@ -186,12 +186,14 @@ public class TestCommand extends Command implements ICommandRestricted {
                 results[number] = Result.FAILED;
                 exceptions[number] = e;
                 failed = true;
-                if (em != null)
+                if (em != null) {
                     em.close();
+                }
             }
 
-            if (!failed)
+            if (!failed) {
                 results[number] = Result.SUCCESS;
+            }
         }
     }
 

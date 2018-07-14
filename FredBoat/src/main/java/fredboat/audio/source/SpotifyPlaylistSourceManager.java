@@ -88,7 +88,9 @@ public class SpotifyPlaylistSourceManager implements AudioSourceManager, Playlis
     public AudioItem loadItem(final DefaultAudioPlayerManager manager, final AudioReference ar) {
 
         String[] data = parse(ar.identifier);
-        if (data == null) return null;
+        if (data == null) {
+            return null;
+        }
         final String spotifyUser = data[0];
         final String spotifyListId = data[1];
 
@@ -103,7 +105,9 @@ public class SpotifyPlaylistSourceManager implements AudioSourceManager, Playlis
         }
 
         String playlistName = plData.getName();
-        if (playlistName == null || "".equals(playlistName)) playlistName = "Spotify Playlist";
+        if (playlistName == null || "".equals(playlistName)) {
+            playlistName = "Spotify Playlist";
+        }
         int tracksTotal = plData.getTotalTracks();
 
         final List<AudioTrack> trackList = new ArrayList<>();
@@ -219,7 +223,9 @@ public class SpotifyPlaylistSourceManager implements AudioSourceManager, Playlis
     public PlaylistInfo getPlaylistDataBlocking(String identifier) {
 
         String[] data = parse(identifier);
-        if (data == null) return null;
+        if (data == null) {
+            return null;
+        }
         final String spotifyUser = data[0];
         final String spotifyListId = data[1];
 

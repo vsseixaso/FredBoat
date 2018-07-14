@@ -49,7 +49,7 @@ public class VolumeCommand extends Command implements IMusicCommand, ICommandRes
     @Override
     public void onInvoke(@Nonnull CommandContext context) {
 
-        if(Config.CONFIG.getDistribution().volumeSupported()) {
+        if (Config.CONFIG.getDistribution().volumeSupported()) {
 
             GuildPlayer player = PlayerRegistry.getOrCreate(context.guild);
             try {

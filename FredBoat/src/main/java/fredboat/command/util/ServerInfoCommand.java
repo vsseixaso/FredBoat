@@ -56,7 +56,7 @@ public class ServerInfoCommand extends Command implements IUtilCommand {
         eb.setTitle(context.i18nFormat("serverinfoTitle", guild.getName()), null);
         eb.setThumbnail(guild.getIconUrl());
         for (Member u : guild.getMembers()) {
-            if(u.getOnlineStatus() != OnlineStatus.OFFLINE) {
+            if (u.getOnlineStatus() != OnlineStatus.OFFLINE) {
                 i++;
             }
         }

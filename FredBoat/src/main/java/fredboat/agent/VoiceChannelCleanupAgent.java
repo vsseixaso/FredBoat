@@ -116,7 +116,7 @@ public class VoiceChannelCleanupAgent extends FredBoatAgent {
         ArrayList<Member> l = new ArrayList<>();
 
         for(Member m : vc.getMembers()){
-            if(!m.getUser().isBot()){
+            if (!m.getUser().isBot()){
                 l.add(m);
             }
         }

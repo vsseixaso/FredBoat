@@ -72,7 +72,9 @@ public class GuildPermissions implements IEntity, Serializable {
     private String userList = "";
 
     public List<String> getAdminList() {
-        if (adminList == null) return new ArrayList<>();
+        if (adminList == null) {
+            return new ArrayList<>();
+        }
 
         return Arrays.asList(adminList.split(" "));
     }
@@ -87,7 +89,9 @@ public class GuildPermissions implements IEntity, Serializable {
     }
 
     public List<String> getDjList() {
-        if (djList == null) return new ArrayList<>();
+        if (djList == null) {
+            return new ArrayList<>();
+        }
 
         return Arrays.asList(djList.split(" "));
     }
@@ -102,7 +106,9 @@ public class GuildPermissions implements IEntity, Serializable {
     }
 
     public List<String> getUserList() {
-        if (userList == null) return new ArrayList<>();
+        if (userList == null) {
+            return new ArrayList<>();
+        }
 
         return Arrays.asList(userList.split(" "));
     }

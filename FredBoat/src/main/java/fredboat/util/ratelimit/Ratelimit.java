@@ -94,7 +94,9 @@ public class Ratelimit {
         //ensure whatever you do in here is threadsafe, but minimize usage of synchronized as it adds overhead
         long id = context.getUser().getIdLong();
         //first of all, ppl that can never get limited or blacklisted, no matter what
-        if (userWhiteList.contains(id)) return true;
+        if (userWhiteList.contains(id)) {
+            return true;
+        }
 
         //user or guild scope?
         if (scope == Scope.GUILD) {
@@ -102,8 +104,9 @@ public class Ratelimit {
         }
 
         Rate rate = limits.get(id);
-        if (rate == null)
+        if (rate == null) {
             rate = getOrCreateRate(id);
+        }
 
         //synchronize on the individual rate objects since we are about to change and save them
         //noinspection SynchronizationOnLocalVariableOrMethodParameter
@@ -121,8 +124,9 @@ public class Ratelimit {
             rate.lastUpdated = now;
             //ALLOWED?
             if (rate.timeStamps.size() < maxRequests) {
-                for (int i = 0; i < weight; i++)
+                for (int i = 0; i < weight; i++) {
                     rate.timeStamps.add(now);
+                }
                 //everything is fine, get out of this method
                 return true;
             }
@@ -131,8 +135,9 @@ public class Ratelimit {
         //reaching this point in the code means a rate limit was hit
         //the following code has to handle that
 
-        if (blacklist != null && scope == Scope.USER)
+        if (blacklist != null && scope == Scope.USER) {
             FredBoat.executor.submit(() -> bannerinoUserino(context, blacklist));
+        }
         return false;
     }
 
@@ -158,7 +163,9 @@ public class Ratelimit {
     private synchronized Rate getOrCreateRate(long id) {
         //was one created on the meantime? use that
         Rate result = limits.get(id);
-        if (result != null) return result;
+        if (result != null) {
+            return result;
+        }
 
         //create, save and return it
         result = new Rate(id);

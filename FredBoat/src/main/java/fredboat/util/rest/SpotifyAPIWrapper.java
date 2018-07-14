@@ -108,10 +108,12 @@ public class SpotifyAPIWrapper {
      */
     private void refreshTokenIfNecessary() {
         //refresh the token if it's too old
-        if (System.currentTimeMillis() > this.accessTokenExpires) try {
-            refreshAccessToken();
-        } catch (final Exception e) {
-            log.error("Could not request spotify access token", e);
+        if (System.currentTimeMillis() > this.accessTokenExpires) {
+            try {
+                refreshAccessToken();
+            } catch (final Exception e) {
+                log.error("Could not request spotify access token", e);
+            }
         }
     }
 
@@ -156,7 +158,9 @@ public class SpotifyAPIWrapper {
             //this determines offset and limit on the 2nd+ pass of the do loop
             if (jsonPage != null) {
                 String nextPageUrl;
-                if (!jsonPage.has("next") || jsonPage.get("next") == JSONObject.NULL) break;
+                if (!jsonPage.has("next") || jsonPage.get("next") == JSONObject.NULL) {
+                    break;
+                }
                 nextPageUrl = jsonPage.getString("next");
 
                 final Matcher m = PARAMETER_PATTERN.matcher(nextPageUrl);

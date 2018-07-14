@@ -12,8 +12,9 @@ public class PlayerLimitManager {
     public static boolean checkLimit(Guild guild) {
         GuildPlayer guildPlayer = PlayerRegistry.getExisting(guild);
         //noinspection SimplifiableIfStatement
-        if (guildPlayer != null && guildPlayer.getTrackCount() > 0)
+        if (guildPlayer != null && guildPlayer.getTrackCount() > 0) {
             return true;
+        }
 
         return limit < 0
                 || PlayerRegistry.getPlayingPlayers().size() < limit;

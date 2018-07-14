@@ -125,7 +125,9 @@ public class FredBoatShard extends FredBoat {
         //Rejoin old channels if revived
         channelsToRejoin.forEach(vcid -> {
             VoiceChannel channel = readyEvent.getJDA().getVoiceChannelById(vcid);
-            if (channel == null) return;
+            if (channel == null) {
+                return;
+            }
             GuildPlayer player = PlayerRegistry.getOrCreate(channel.getGuild());
 
             LavalinkManager.ins.openConnection(channel);
@@ -176,7 +178,9 @@ public class FredBoatShard extends FredBoat {
                             .filter(guildPlayer -> guildPlayer.getJda().getShardInfo().getShardId() == shardId)
                             .forEach(guildPlayer -> {
                                 VoiceChannel channel = guildPlayer.getCurrentVoiceChannel();
-                                if (channel != null) channelsToRejoin.add(channel.getId());
+                                if (channel != null) {
+                                    channelsToRejoin.add(channel.getId());
+                                }
                             });
                 } catch (Exception ex) {
                     log.error("Caught exception while saving channels to revive shard {}", shardId, ex);

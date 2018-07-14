@@ -209,9 +209,15 @@ public class TextUtils {
         m.find();
 
         int capturedGroups = 0;
-        if(m.group(1) != null) capturedGroups++;
-        if(m.group(2) != null) capturedGroups++;
-        if(m.group(3) != null) capturedGroups++;
+        if (m.group(1) != null) {
+            capturedGroups++;
+        }
+        if (m.group(2) != null) {
+            capturedGroups++;
+        }
+        if (m.group(3) != null) {
+            capturedGroups++;
+        }
 
         switch(capturedGroups){
             case 0:

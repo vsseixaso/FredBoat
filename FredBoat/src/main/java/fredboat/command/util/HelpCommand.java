@@ -122,8 +122,9 @@ public class HelpCommand extends Command implements IUtilCommand {
         //some special needs
         //to display helpful information on some commands: thirdParam = {2} in the language resources
         String thirdParam = "";
-        if (command instanceof SelectCommand)
+        if (command instanceof SelectCommand) {
             thirdParam = "play";
+        }
 
         return MessageFormat.format(helpStr, Config.CONFIG.getPrefix(), commandOrAlias, thirdParam);
     }
@@ -147,8 +148,9 @@ public class HelpCommand extends Command implements IUtilCommand {
         String out = getFormattedCommandHelp(context, command, trigger);
 
         if (command instanceof ICommandRestricted
-                && ((ICommandRestricted) command).getMinimumPerms() == PermissionLevel.BOT_OWNER)
+                && ((ICommandRestricted) command).getMinimumPerms() == PermissionLevel.BOT_OWNER) {
             out += "\n#" + context.i18n("helpCommandOwnerRestricted");
+        }
         out = TextUtils.asCodeBlock(out, "md");
         out = context.i18n("helpProperUsage") + out;
         context.replyWithName(out);

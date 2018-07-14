@@ -98,8 +98,9 @@ public abstract class AbstractPlayer extends AudioEventAdapterWrapped implements
 
             //Patrons and development get higher quality
             AudioConfiguration.ResamplingQuality quality = AudioConfiguration.ResamplingQuality.LOW;
-            if (Config.CONFIG.getDistribution() == DistributionEnum.PATRON || Config.CONFIG.getDistribution() == DistributionEnum.DEVELOPMENT)
+            if (Config.CONFIG.getDistribution() == DistributionEnum.PATRON || Config.CONFIG.getDistribution() == DistributionEnum.DEVELOPMENT) {
                 quality = AudioConfiguration.ResamplingQuality.MEDIUM;
+            }
 
             playerManager.getConfiguration().setResamplingQuality(quality);
             if (!LavalinkManager.ins.isEnabled()) {
@@ -289,8 +290,9 @@ public abstract class AbstractPlayer extends AudioEventAdapterWrapped implements
         } else if(endReason == AudioTrackEndReason.CLEANUP) {
             log.info("Track " + track.getIdentifier() + " was cleaned up");
         } else if (endReason == AudioTrackEndReason.LOAD_FAILED) {
-            if (onErrorHook != null)
+            if (onErrorHook != null) {
                 onErrorHook.accept(new MessagingException("Track `" + track.getInfo().title + "` failed to load. Skipping..."));
+            }
             audioTrackProvider.skipped();
             loadAndPlay();
         } else {
@@ -344,7 +346,9 @@ public abstract class AbstractPlayer extends AudioEventAdapterWrapped implements
         }
 
         if (silent.length < 1 || !silent[0]) {
-            if (onPlayHook != null) onPlayHook.accept(trackContext);
+            if (onPlayHook != null) {
+                onPlayHook.accept(trackContext);
+            }
         }
     }
 
@@ -367,7 +371,7 @@ public abstract class AbstractPlayer extends AudioEventAdapterWrapped implements
         LavaplayerPlayerWrapper lavaplayerPlayer = (LavaplayerPlayerWrapper) player;
         lastFrame = lavaplayerPlayer.provide();
 
-        if(lastFrame == null) {
+        if (lastFrame == null) {
             audioLossCounter.onLoss();
             return false;
         } else {
@@ -399,7 +403,7 @@ public abstract class AbstractPlayer extends AudioEventAdapterWrapped implements
 
     @Override
     public void onTrackException(AudioPlayer player, AudioTrack track, FriendlyException exception) {
-        if(Config.CONFIG.getLavaplayerNodes().length > 0) {
+        if (Config.CONFIG.getLavaplayerNodes().length > 0) {
             log.error("Lavaplayer encountered an exception during playback while playing " + track.getIdentifier(), exception);
             log.error("Performance stats for errored track: " + audioLossCounter);
         }

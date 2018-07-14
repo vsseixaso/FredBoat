@@ -67,7 +67,9 @@ public class MusicHelpCommand extends Command implements IUtilCommand {
             Command command = CommandRegistry.getCommand(commandOrAlias).command;
 
             List<String> aliases = commandToAliases.get(command.getClass());
-            if (aliases == null) aliases = new ArrayList<>();
+            if (aliases == null) {
+                aliases = new ArrayList<>();
+            }
             aliases.add(commandOrAlias);
             commandToAliases.put(command.getClass(), aliases);
         }
@@ -76,8 +78,9 @@ public class MusicHelpCommand extends Command implements IUtilCommand {
         List<Command> sortedComms = new ArrayList<>();
         for (List<String> as : commandToAliases.values()) {
             Command c = CommandRegistry.getCommand(as.get(0)).command;
-            if (c instanceof IMusicCommand)
+            if (c instanceof IMusicCommand) {
                 sortedComms.add(c);
+            }
         }
         sortedComms.sort(new MusicCommandsComparator());
 

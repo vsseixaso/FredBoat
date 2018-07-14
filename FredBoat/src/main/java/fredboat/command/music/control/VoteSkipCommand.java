@@ -153,7 +153,9 @@ public class VoteSkipCommand extends Command implements IMusicCommand, ICommandR
         StringBuilder field2 = new StringBuilder();
         for (Long userId : voters) {
             StringBuilder field = field1;
-            if (i++ % 2 == 1) field = field2;
+            if (i++ % 2 == 1) {
+                field = field2;
+            }
 
             Member member = context.getGuild().getMemberById(userId);
             if (member != null) {

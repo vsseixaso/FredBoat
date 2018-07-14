@@ -119,7 +119,7 @@ public class MathCommand extends Command implements IUtilCommand {
             output = "Could not parse one of your numbers! Please check them and try again.";
         }
 
-        if(output.contains("Infinity")) { //TODO: Better fix for an operation returning "Infinity".
+        if (output.contains("Infinity")) { //TODO: Better fix for an operation returning "Infinity".
             context.reply(context.i18n("mathOperationInfinity"));
         } else {
             context.reply(output);

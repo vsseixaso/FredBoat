@@ -55,7 +55,7 @@ public class CarbonitexAgent extends FredBoatAgent {
 
     private void sendStats() {
         for (FredBoat fb : FredBoat.getShards()) {
-            if(fb.getJda().getStatus() !=  JDA.Status.CONNECTED) {
+            if (fb.getJda().getStatus() !=  JDA.Status.CONNECTED) {
                 log.warn("Skipping posting stats because not all shards are online!");
                 return;
             }
